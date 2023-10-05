@@ -8,7 +8,7 @@ if __name__ == "__main__":
         print("0 arguments.")
     elif (length == 1):
         print("1 argument:")
-        print("{:d} arguments:".format(len(sys.argv), sys.argv[0]))
+        print("{:d}: {}".format(len(sys.argv), sys.argv[0]))
     else:
         print("{:d} arguments:".format(length))
         number = 1
