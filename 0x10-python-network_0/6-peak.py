@@ -1,29 +1,32 @@
 #!/usr/bin/python3
+"""
+   this function finds a peak in a list of unsorted integers
+"""
 
 
 def find_peak(list_of_integers):
-
-    if list_of_integers is None or len(list_of_integers) == 0:
+    '''
+    Finds the peak in a list of numbers
+    '''
+    length = len(list_of_integers)
+    if length == 0:
         return None
+    if length == 1:
+        return (list_of_integers[0])
+    if length == 2:
+        return list_of_integers[0] \
+           if list_of_integers[0] >= list_of_integers[1] \
+           else list_of_integers[1]
 
-    if len(list_of_integers) == 1:
-        return list_of_integers[0]
-
-    mid_idx = int(len(list_of_integers) / 2)
-
-    if mid_idx != len(list_of_integers) - 1:
-        if list_of_integers[mid_idx - 1] < list_of_integers[mid_idx] and\
-           list_of_integers[mid_idx + 1] < list_of_integers[mid_idx]:
-            return list_of_integers[mid_idx]
-    else:
-        if list_of_integers[mid_idx - 1] < list_of_integers[mid_idx]:
-            return list_of_integers[mid_idx]
-        else:
-            return list_of_integers[mid_idx - 1]
-
-    if list_of_integers[mid_idx - 1] > list_of_integers[mid_idx]:
-        a_list = list_of_integers[0:mid_idx]
-    else:
-        a_list = list_of_integers[mid_idx + 1:]
-
-    return find_peak(a_list)
+    for idx in range(0, length):
+        value = list_of_integers[idx]
+        if (idx > 0 and idx < length - 1 and
+           list_of_integers[idx + 1] <= value and
+           list_of_integers[idx - 1] <= value):
+            return value
+        elif idx == 0 and list_of_integers[idx + 1] <= value:
+            return value
+        elif idx == length - 1 and list_of_integers[idx - 1] <= value:
+            return value
+    return value
+    
